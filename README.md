@@ -54,4 +54,12 @@ Search `src/site.js` for `[` to find placeholders:
 
 Any Node host works (Render, Railway, Fly.io, a VPS behind nginx). Set `NODE_ENV=production`,
 `PORT`, `SITE_URL` and the SMTP variables. `GET /healthz` returns `{ "ok": true }` for health checks.
+
+**Vercel** deploys it with zero config: `src/app.js` default-exports the Express app, which Vercel runs
+as a single function, and `public/` is served from its CDN. Two things differ from a normal server:
+
+- The filesystem is read-only, so enquiries can't be saved to `data/`. Set the `SMTP_*` and
+  `CONTACT_TO` environment variables in the Vercel project, or the contact form will ask visitors
+  to email you instead.
+- `PORT` and `NODE_ENV` are set by Vercel; you only need `SITE_URL` and the SMTP variables.
 # forge-works-studio-site

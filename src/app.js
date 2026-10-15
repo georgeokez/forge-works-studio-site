@@ -8,7 +8,7 @@ import { contactRouter } from './contact.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-export function createApp() {
+function createApp() {
   const app = express();
   const isProd = process.env.NODE_ENV === 'production';
 
@@ -67,3 +67,6 @@ export function createApp() {
 
   return app;
 }
+
+// Default export is what Vercel runs as the serverless function; server.js listens on it locally.
+export default createApp();

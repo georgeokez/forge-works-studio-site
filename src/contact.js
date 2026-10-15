@@ -55,10 +55,18 @@ export function validate(body) {
 
 async function deliver(data, ip) {
   const record = { ...data, ip, at: new Date().toISOString() };
-  await fs.mkdir(dataDir, { recursive: true });
-  await fs.appendFile(path.join(dataDir, 'enquiries.jsonl'), JSON.stringify(record) + '\n');
-
   const t = getTransport();
+
+  // Serverless hosts (e.g. Vercel) have a read-only filesystem, so the local log is best-effort
+  // when email is configured. Without email it's the only record, so a failed write is an error.
+  try {
+    await fs.mkdir(dataDir, { recursive: true });
+    await fs.appendFile(path.join(dataDir, 'enquiries.jsonl'), JSON.stringify(record) + '\n');
+  } catch (err) {
+    if (!t) throw err;
+    console.warn('Could not save enquiry to disk:', err.message);
+  }
+
   if (t) {
     await t.sendMail({
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
