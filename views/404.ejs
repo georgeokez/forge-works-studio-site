@@ -1,0 +1,10 @@
+<%- include('partials/head', { title: locals.error ? 'Something went wrong' : 'Page not found' }) %>
+<%- include('partials/header') %>
+<main id="main" class="notfound">
+  <div class="wrap">
+    <p class="eyebrow"><%= locals.error ? '500' : '404' %></p>
+    <h1 class="display-lg"><%= locals.error ? 'Something went wrong.' : 'Nothing forged here.' %><br><em>Let's get you back.</em></h1>
+    <a href="/" class="btn" data-magnetic><span>Back to home</span></a>
+  </div>
+</main>
+<%- include('partials/footer') %>

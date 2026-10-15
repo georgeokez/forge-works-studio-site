@@ -1,0 +1,245 @@
+<%
+  const errs = locals.errors || {};
+  const vals = locals.values || {};
+  const status = locals.status || null;
+  const orbit = site.services.map(s => s.title.toUpperCase()).join('  /  ') + '  /  ';
+%>
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main id="main">
+
+  <!-- Hero -->
+  <section id="top" class="hero" data-hero>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <% if (site.booking) { %>
+        <div class="badge a-in"><span class="dot" aria-hidden="true"></span>Now booking new projects</div>
+        <% } %>
+        <h1 class="display-xl">
+          <span class="line"><span>Software and</span></span>
+          <span class="line l2"><span>websites, <em class="swash">quietly<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 13C48 5 118 3 196 9"/></svg></em></span></span>
+          <span class="line l3"><span>well made.</span></span>
+        </h1>
+        <p class="lede a-in a-in2"><%= site.description %></p>
+        <div class="hero-actions a-in a-in3">
+          <a href="#contact" class="btn btn-lg" data-magnetic><span>Start a project</span></a>
+          <a href="#work" class="ulink strong arrow-link">View selected work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true" data-hero-art>
+        <svg viewBox="0 0 400 400">
+          <defs>
+            <path id="orbit-path" d="M200 200m-163 0a163 163 0 1 1 326 0a163 163 0 1 1-326 0"/>
+          </defs>
+          <g class="layer" style="--depth: 6">
+            <g class="spin slow">
+              <% for (let i = 0; i < 72; i++) { %><line class="tick<%= i % 6 ? '' : ' major' %>" x1="200" y1="6" x2="200" y2="<%= i % 6 ? 13 : 22 %>" transform="rotate(<%= i * 5 %> 200 200)" style="--i: <%= i %>"/><% } %>
+            </g>
+          </g>
+          <g class="layer" style="--depth: 12">
+            <g class="spin rev">
+              <text class="orbit-text"><textPath href="#orbit-path" textLength="1022" lengthAdjust="spacing"><%= orbit + orbit %></textPath></text>
+            </g>
+          </g>
+          <g class="layer" style="--depth: 18">
+            <g class="spin mid">
+              <circle class="ring-accent" cx="200" cy="200" r="134"/>
+              <circle class="orbit-dot" cx="200" cy="66" r="6"/>
+            </g>
+          </g>
+          <g class="layer" style="--depth: 26">
+            <path class="crosshair" d="M200 78v18M200 304v18M78 200h18M304 200h18"/>
+            <circle class="disc" cx="200" cy="200" r="104"/>
+            <text class="disc-text" x="200" y="194" text-anchor="middle">Built</text>
+            <text class="disc-text accent" x="200" y="230" text-anchor="middle">to last</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="marquee" data-marquee>
+      <div class="marquee-track" data-marquee-track>
+        <% for (let copy = 0; copy < 2; copy++) { %>
+        <ul class="marquee-group"<%- copy ? ' aria-hidden="true"' : '' %>>
+          <% site.capabilities.forEach(c => { %><li><%= c %><svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 7.6 3.4 10.6 12 12-8.6 1.4-11.1 4.4-12 12-.9-7.6-3.4-10.6-12-12C8.6 10.6 11.1 7.6 12 0Z"/></svg></li><% }) %>
+        </ul>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Goal -->
+  <section class="band band-white">
+    <div class="wrap goal-grid">
+      <span class="kicker rv">Our goal</span>
+      <p class="goal" data-goal>We exist to give growing businesses, wherever they are, the kind of digital work usually reserved for big budgets — <em>engineered properly, delivered on time and cared for long after launch.</em></p>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="wrap stack-40">
+      <div class="section-head">
+        <div class="stack-20">
+          <span class="kicker rv"><b>01</b> What we do</span>
+          <h2 class="display-md" data-split>Services</h2>
+        </div>
+        <p class="muted rv measure-24">One team for the full life of your product — from first sketch to year five.</p>
+      </div>
+      <div class="service-list" data-stagger>
+        <div class="rule draw" aria-hidden="true"></div>
+        <% site.services.forEach((s, i) => { %>
+        <a href="<%= s.href %>" class="service rv">
+          <span class="service-title"><span class="service-num">0<%= i + 1 %></span><%= s.title %></span>
+          <span class="muted"><%= s.text %></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section id="approach" class="section dark" data-spotlight>
+    <div class="wrap principles-grid">
+      <div class="principles-intro stack-20">
+        <span class="kicker rv"><b>02</b> What we believe</span>
+        <h2 class="display-md tight" data-split>Five principles we <em>don't</em> compromise on.</h2>
+        <p class="muted rv measure-26">They shape every estimate, every design review and every line of code we ship.</p>
+      </div>
+      <ol class="principles" data-stagger data-principles>
+        <% site.principles.forEach(p => { %>
+        <li class="rv">
+          <span class="num"><%= p.n %></span>
+          <div><strong><%= p.title %></strong><span class="muted"><%= p.text %></span></div>
+        </li>
+        <% }) %>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section">
+    <div class="wrap stack-56">
+      <div class="stack-20">
+        <span class="kicker rv"><b>03</b> Process</span>
+        <h2 class="display-md" data-split>How we work</h2>
+      </div>
+      <div class="process" data-process>
+        <div class="process-line" aria-hidden="true"></div>
+        <ol data-stagger>
+          <% site.process.forEach((step, i) => { %>
+          <li class="rv">
+            <span class="node<%= i === 0 ? ' filled' : '' %>" aria-hidden="true"></span>
+            <span class="step-num">0<%= i + 1 %></span>
+            <strong><%= step.title %></strong>
+            <span class="muted"><%= step.text %></span>
+          </li>
+          <% }) %>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="section band-white bordered-top">
+    <div class="wrap stack-48">
+      <div class="stack-20">
+        <span class="kicker rv"><b>04</b> Portfolio</span>
+        <h2 class="display-md" data-split>Selected work</h2>
+      </div>
+      <% site.work.forEach(w => { %>
+      <a href="<%= w.href %>" class="case card rv" data-cursor="View case">
+        <div class="case-cover" style="--cover: <%= w.color %>">
+          <span class="case-name"><%= w.name %></span>
+          <div class="mock" aria-hidden="true" data-parallax>
+            <div class="mock-bar"><i></i><i></i><i></i><span></span></div>
+            <div class="mock-page">
+              <span class="mock-nav"></span>
+              <span class="mock-h"></span>
+              <span class="mock-h short"></span>
+              <span class="mock-p"></span>
+              <span class="mock-btn"></span>
+              <span class="mock-cards"><i></i><i></i><i></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <span class="eyebrow"><%= w.meta %></span>
+          <strong class="case-title"><%= w.headline %></strong>
+          <span class="muted"><%= w.summary %></span>
+          <span class="ulink strong arrow-link">Read the case study <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+      <% }) %>
+      <p class="faint rv">[More case studies to be added]</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section contact bordered-top">
+    <div class="wrap contact-grid">
+      <div class="stack-36">
+        <span class="kicker rv"><b>05</b> Contact</span>
+        <h2 class="display-lg" data-split>Have something in mind?<br><em>Let's make it well.</em></h2>
+        <a href="mailto:<%= site.email %>" class="ulink contact-email arrow-link rv"><%= site.email %> <span aria-hidden="true">↗</span></a>
+        <p class="muted rv">We reply within one working day with honest next steps.</p>
+      </div>
+
+      <form class="contact-form rv" action="/contact" method="post" novalidate data-contact-form>
+        <div class="form-status" role="status" aria-live="polite" data-form-status>
+          <% if (status === 'sent') { %><p class="ok">Thanks — your message is in. We'll be in touch within one working day.</p><% } %>
+          <% if (status === 'error') { %><p class="err">Sorry, that didn't send. Please email <a href="mailto:<%= site.email %>"><%= site.email %></a>.</p><% } %>
+          <% if (status === 'invalid') { %><p class="err">Please check the highlighted fields.</p><% } %>
+        </div>
+
+        <div class="field-row">
+          <div class="field<%= errs.name ? ' has-error' : '' %>">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" autocomplete="name" required value="<%= vals.name || '' %>" aria-describedby="e-name">
+            <span class="field-error" id="e-name"><%= errs.name || '' %></span>
+          </div>
+          <div class="field<%= errs.email ? ' has-error' : '' %>">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required value="<%= vals.email || '' %>" aria-describedby="e-email">
+            <span class="field-error" id="e-email"><%= errs.email || '' %></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-company">Company <span class="optional">(optional)</span></label>
+          <input id="f-company" name="company" autocomplete="organization" value="<%= vals.company || '' %>">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-type">What do you need?</label>
+            <select id="f-type" name="type">
+              <% site.projectTypes.forEach(t => { %><option<%= vals.type === t ? ' selected' : '' %>><%= t %></option><% }) %>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-budget">Budget</label>
+            <select id="f-budget" name="budget">
+              <% site.budgets.forEach(b => { %><option<%= vals.budget === b ? ' selected' : '' %>><%= b %></option><% }) %>
+            </select>
+          </div>
+        </div>
+
+        <div class="field<%= errs.message ? ' has-error' : '' %>">
+          <label for="f-message">Tell us about the project</label>
+          <textarea id="f-message" name="message" rows="5" required aria-describedby="e-message"><%= vals.message || '' %></textarea>
+          <span class="field-error" id="e-message"><%= errs.message || '' %></span>
+        </div>
+
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">Leave this empty</label>
+          <input id="f-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" class="btn btn-lg" data-submit data-magnetic><span>Send message</span></button>
+      </form>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') %>

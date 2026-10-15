@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= locals.title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}` %></title>
+  <meta name="description" content="<%= site.description %>">
+  <meta name="theme-color" content="#f6f5f2">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= site.name %> — <%= site.tagline %>">
+  <meta property="og:description" content="<%= site.description %>">
+  <% if (siteUrl) { %><meta property="og:url" content="<%= siteUrl %>"><link rel="canonical" href="<%= siteUrl %>"><% } %>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>

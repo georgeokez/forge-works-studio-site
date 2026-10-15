@@ -1,0 +1,35 @@
+<footer class="site-footer">
+  <div class="wrap footer-top">
+    <p class="footer-lede"><%= site.tagline %></p>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <span class="kicker">Explore</span>
+        <ul>
+          <% site.nav.forEach(item => { %><li><a href="/<%= item.href %>" class="ulink"><%= item.label %></a></li><% }) %>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="kicker">Follow</span>
+        <ul class="social">
+          <% site.social.forEach(s => { %><li><a href="<%= s.href %>" class="ulink" rel="noopener"><%= s.label %></a></li><% }) %>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="kicker">Say hello</span>
+        <ul>
+          <li><a href="mailto:<%= site.email %>" class="ulink"><%= site.email %></a></li>
+          <li><a href="/#contact" class="ulink">Start a project</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="footer-mark" aria-hidden="true" data-letters>Forgeworks</p>
+  </div>
+  <div class="wrap footer-inner">
+    <span>© <%= year %> <%= site.name %></span>
+    <a href="#main" class="to-top ulink">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
+</body>
+</html>

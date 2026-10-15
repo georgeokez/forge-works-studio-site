@@ -1,0 +1,20 @@
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+  <div class="wrap header-inner">
+    <a href="/#top" class="brand" aria-label="<%= site.name %> home">
+      <span class="brand-name">Forgeworks</span><span class="brand-sub">Studio</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="sr-only">Menu</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path class="l1" d="M4 8h16"/><path class="l2" d="M4 16h16"/></svg>
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <% site.nav.forEach(item => { %>
+        <a href="/<%= item.href %>" class="ulink" data-spy="<%= item.href.slice(1) %>"><%= item.label %></a>
+      <% }) %>
+      <a href="/#contact" class="btn btn-sm" data-magnetic><span>Let's talk</span></a>
+    </nav>
+  </div>
+  <span class="scroll-progress" aria-hidden="true" data-scroll-progress></span>
+</header>
